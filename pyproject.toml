@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "easy-scraper-py"
+version = "0.1.0"
+description = ""
+authors = ["cympfh <cympfh@gmail.com>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+
+[tool.poetry.dev-dependencies]
+black = "^22.1.0"
+isort = "^5.10.1"
+python-language-server = "^0.36.2"
+mypy = "^0.941"
+pytest = "^7.1.1"
+
+[tool.mypy]
+ignore_missing_imports = true
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
