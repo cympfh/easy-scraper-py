@@ -1,9 +1,12 @@
 [tool.poetry]
 name = "easy-scraper-py"
 version = "0.1.1"
-description = ""
+description = "An Easy Scraper for HTML"
 authors = ["cympfh <cympfh@gmail.com>"]
 license = "MIT"
+readme = "README.md"
+homepage = "https://github.com/cympfh/easy-scraper-py/"
+repository = "https://github.com/cympfh/easy-scraper-py/"
 packages = [
     { include = "easy_scraper/**/*.py" },
 ]
