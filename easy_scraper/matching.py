@@ -27,10 +27,6 @@ def match_attr(x: dict, y: dict) -> Optional[dict]:
 
 
 def match_siblings(ref_children: list[entity.Html], pat_children: list[entity.Html]) -> list[dict]:
-    # print("--- match_siblings")
-    # print(ref_children)
-    # print(pat_children)
-    # print("---")
     if len(ref_children) < len(pat_children):
         return []
     if len(pat_children) == 0:
@@ -55,11 +51,6 @@ def match_html(ref: entity.Html, pattern: entity.Html) -> list[dict[str, str]]:
     All results.
     Empty if nothing is matched.
     """
-    print("--- matching")
-    print(ref)
-    print(pattern)
-    print("---")
-
     if isinstance(ref, entity.PlainText) and isinstance(pattern, entity.PlainText):
         if ref.data == pattern.data:
             return [{}]
