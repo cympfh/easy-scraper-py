@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "easy-scraper-py"
-version = "0.1.0"
+version = "0.1.1"
 description = ""
 authors = ["cympfh <cympfh@gmail.com>"]
 license = "MIT"

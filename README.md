@@ -44,3 +44,14 @@ pattern = "<a class=here>{{ text }}</a>"
 
 easy_scraper.match(target, pattern)  # [{'text': 'Here'}]
 ```
+
+```python
+# XML (RSS) scraping
+import easy_scraper
+import urllib.request
+
+body = urllib.request.urlopen("https://kuragebunch.com/rss/series/10834108156628842505").read().decode()
+res = easy_scraper.match(body, "<item><title>{{ title }}</title><link>{{ link }}</link></item>")
+for item in res[:5]:
+    print(item)
+```

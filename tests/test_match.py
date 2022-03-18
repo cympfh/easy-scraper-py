@@ -23,6 +23,27 @@ class TestMatch:
     def test_a_text(self, target, pattern):
         assert easy_scraper.match(target, pattern) == [{"text": "Here"}]
 
+    def test_plaintext(self):
+        target = r"""
+        <div class=container>
+            <div>
+                Links:
+                <a href="link1">foo</a>
+                <a href="link2">bar</a>
+                <div>
+                    <a href="link3">baz</a>
+                </div>
+            </div>
+        </div>
+        """
+        pattern = r"<div class=container>{{ text }}</div>"
+        assert easy_scraper.match(target, pattern) == [
+            {"text": "Links:"},
+            {"text": "foo"},
+            {"text": "bar"},
+            {"text": "baz"},
+        ]
+
     def test_attr(self):
         target = r"""
         <div>

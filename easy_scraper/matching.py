@@ -73,5 +73,11 @@ def match_html(ref: entity.Html, pattern: entity.Html) -> list[dict[str, str]]:
                     res.append(res_attrs | res_siblings)
         return res
 
+    elif isinstance(ref, entity.Elem):
+        res = []
+        for child in ref.children:
+            res.extend(match_html(child, pattern))
+        return res
+
     else:
         return []
