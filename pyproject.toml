@@ -4,6 +4,9 @@ version = "0.1.0"
 description = ""
 authors = ["cympfh <cympfh@gmail.com>"]
 license = "MIT"
+packages = [
+    { include = "easy_scraper/**/*.py" },
+]
 
 [tool.poetry.dependencies]
 python = "^3.9"
