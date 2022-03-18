@@ -97,3 +97,8 @@ class TestMatch:
             {"x": "2", "y": "3"},
             {"x": "X", "y": "Y"},
         ]
+
+    def test_empty(self):
+        assert easy_scraper.match("<a async>OK</a>", "<a async>{{x}}</a>") == [{"x": "OK"}]
+        assert easy_scraper.match("<a data=some>OK</a>", "<a data>{{x}}</a>") == [{"x": "OK"}]
+        assert easy_scraper.match("<a data>NG</a>", "<a data=something>{{x}}</a>") == []

@@ -25,4 +25,8 @@ class Pattern:
     name: str
 
 
-Html = Union[Elem, PlainText, Pattern]
+class Empty:
+    pass
+
+
+Html = Union[Elem, PlainText, Pattern, Empty]

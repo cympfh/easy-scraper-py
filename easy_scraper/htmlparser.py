@@ -1,12 +1,14 @@
 import html.parser
 import re
-from typing import Union
+from typing import Optional, Union
 
 from easy_scraper import entity
 
 
 class HTMLParser(html.parser.HTMLParser):
-    def text(self, data: str) -> Union[entity.PlainText, entity.Pattern]:
+    def text(self, data: Optional[str]) -> entity.Html:
+        if data is None:
+            return entity.Empty()
         data = data.strip()
         if self.is_pattern:
             match = re.match(r"{{\s*(\w*)\s*}}", data)

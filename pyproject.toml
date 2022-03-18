@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "easy-scraper-py"
-version = "0.1.3"
+version = "0.1.5"
 description = "An Easy Scraper for HTML"
 authors = ["cympfh <cympfh@gmail.com>"]
 license = "MIT"

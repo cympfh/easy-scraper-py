@@ -18,6 +18,8 @@ def match_attr(x: dict, y: dict) -> Optional[dict]:
             return None
         a = x[k]
         b = y[k]
+        if isinstance(a, entity.Empty) and not isinstance(b, entity.Empty):
+            return None
         if isinstance(a, entity.PlainText) and isinstance(b, entity.PlainText):
             if a.data != b.data:
                 return None
