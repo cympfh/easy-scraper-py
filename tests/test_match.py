@@ -71,6 +71,32 @@ class TestMatch:
             {"link": "link3", "text": "baz"},
         ]
 
+    def test_attr_subset(self):
+        target = r"""
+        <div>
+            <span class="x y">XY</span>
+            <span class="x y z">XYZ</span>
+            <span class="y z">YZ</span>
+            <span class="z">Z</span>
+        </div>
+        """
+        assert easy_scraper.match(target, "<span class='x'>{{text}}</span>") == [
+            {"text": "XY"},
+            {"text": "XYZ"},
+        ]
+        assert easy_scraper.match(target, "<span class='y z'>{{text}}</span>") == [
+            {"text": "XYZ"},
+            {"text": "YZ"},
+        ]
+        assert easy_scraper.match(target, "<span class='z'>{{text}}</span>") == [
+            {"text": "XYZ"},
+            {"text": "YZ"},
+            {"text": "Z"},
+        ]
+        assert easy_scraper.match(target, "<span class='z y x'>{{text}}</span>") == [
+            {"text": "XYZ"},
+        ]
+
     def test_siblings(self):
         target = r"""
         <div>

@@ -20,10 +20,15 @@ def match_attr(x: dict, y: dict) -> Optional[dict]:
         b = y[k]
         if isinstance(a, entity.Empty) and not isinstance(b, entity.Empty):
             return None
-        if isinstance(a, entity.PlainText) and isinstance(b, entity.PlainText):
-            if a.data != b.data:
+        elif isinstance(a, entity.PlainText) and isinstance(b, entity.PlainText):
+            if k == "class":
+                aset = set(a.data.strip().split())
+                bset = set(b.data.strip().split())
+                if not bset.issubset(aset):
+                    return None
+            elif a.data != b.data:
                 return None
-        if isinstance(a, entity.PlainText) and isinstance(b, entity.Pattern):
+        elif isinstance(a, entity.PlainText) and isinstance(b, entity.Pattern):
             ret[b.name] = a.data
     return ret
 
