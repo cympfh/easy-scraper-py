@@ -12,7 +12,9 @@ class Elem:
     parent: Optional[Html]
 
     def __repr__(self) -> str:
-        return f"<{self.tag} {self.attrs}>{ ' '.join(repr(c) for c in self.children) }</>"
+        return (
+            f"<{self.tag} {self.attrs}>{ ' '.join(repr(c) for c in self.children) }</>"
+        )
 
 
 @dataclass

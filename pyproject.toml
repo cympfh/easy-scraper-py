@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "easy-scraper-py"
-version = "0.1.6"
+version = "1.0.0"
 description = "An Easy Scraper for HTML"
 authors = ["cympfh <cympfh@gmail.com>"]
 license = "MIT"
@@ -23,6 +23,9 @@ pytest = "^7.1.1"
 
 [tool.mypy]
 ignore_missing_imports = true
+
+[tool.black]
+max_line_length = 150
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
