@@ -33,7 +33,9 @@ def match_attr(x: dict, y: dict) -> Optional[dict]:
     return ret
 
 
-def match_siblings(ref_children: list[entity.Html], pat_children: list[entity.Html]) -> list[dict]:
+def match_siblings(
+    ref_children: list[entity.Html], pat_children: list[entity.Html]
+) -> list[dict]:
     if len(ref_children) < len(pat_children):
         return []
     if len(pat_children) == 0:

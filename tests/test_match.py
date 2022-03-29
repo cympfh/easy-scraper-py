@@ -7,16 +7,16 @@ class TestMatch:
     @pytest.mark.parametrize(
         "target,pattern",
         [
-            ("<a>Here</a>", "<a>{{ text }}</a>"),
-            ("<body><a>Here</a></body>", "<a>{{ text }}</a>"),
-            ("<html><body><a>Here</a></body></html>", "<a>{{ text }}</a>"),
+            ("<a>Here</a>", "<a>{ text }</a>"),
+            ("<body><a>Here</a></body>", "<a>{ text }</a>"),
+            ("<html><body><a>Here</a></body></html>", "<a>{ text }</a>"),
             (
                 "<body><a class=here>Here</a><a class=nothere>NotHere</a></body>",
-                "<a class=here>{{ text }}</a>",
+                "<a class=here>{ text }</a>",
             ),
             (
                 "<body><b>NotMe</b><a class=here>Here</a><a class=nothere>NotHere</a></body>",
-                "<a class=here>{{ text }}</a>",
+                "<a class=here>{ text }</a>",
             ),
         ],
     )
@@ -36,7 +36,7 @@ class TestMatch:
             </div>
         </div>
         """
-        pattern = r"<div class=container>{{ text }}</div>"
+        pattern = r"<div class=container>{ text }</div>"
         assert easy_scraper.match(target, pattern) == [
             {"text": "Links:"},
             {"text": "foo"},
@@ -62,7 +62,7 @@ class TestMatch:
         """
         pattern = r"""
             <div class=here>
-                <a href="{{ link }}">{{ text }}</a>
+                <a href="{ link }">{ text }</a>
             </div>
         """
         assert easy_scraper.match(target, pattern) == [
@@ -80,20 +80,20 @@ class TestMatch:
             <span class="z">Z</span>
         </div>
         """
-        assert easy_scraper.match(target, "<span class='x'>{{text}}</span>") == [
+        assert easy_scraper.match(target, "<span class='x'>{text}</span>") == [
             {"text": "XY"},
             {"text": "XYZ"},
         ]
-        assert easy_scraper.match(target, "<span class='y z'>{{text}}</span>") == [
+        assert easy_scraper.match(target, "<span class='y z'>{text}</span>") == [
             {"text": "XYZ"},
             {"text": "YZ"},
         ]
-        assert easy_scraper.match(target, "<span class='z'>{{text}}</span>") == [
+        assert easy_scraper.match(target, "<span class='z'>{text}</span>") == [
             {"text": "XYZ"},
             {"text": "YZ"},
             {"text": "Z"},
         ]
-        assert easy_scraper.match(target, "<span class='z y x'>{{text}}</span>") == [
+        assert easy_scraper.match(target, "<span class='z y x'>{text}</span>") == [
             {"text": "XYZ"},
         ]
 
@@ -113,8 +113,8 @@ class TestMatch:
         """
         pattern = r"""
         <ul>
-            <li>{{ x }}</li>
-            <li>{{ y }}</li>
+            <li>{ x }</li>
+            <li>{ y }</li>
         </ul>
         """
         assert easy_scraper.match(target, pattern) == [
@@ -125,6 +125,6 @@ class TestMatch:
         ]
 
     def test_empty(self):
-        assert easy_scraper.match("<a async>OK</a>", "<a async>{{x}}</a>") == [{"x": "OK"}]
-        assert easy_scraper.match("<a data=some>OK</a>", "<a data>{{x}}</a>") == [{"x": "OK"}]
-        assert easy_scraper.match("<a data>NG</a>", "<a data=something>{{x}}</a>") == []
+        assert easy_scraper.match("<a async>OK</a>", "<a async>{x}</a>") == [{"x": "OK"}]
+        assert easy_scraper.match("<a data=some>OK</a>", "<a data>{x}</a>") == [{"x": "OK"}]
+        assert easy_scraper.match("<a data>NG</a>", "<a data=something>{x}</a>") == []

@@ -1,7 +1,7 @@
 # easy-scraper-py
 
 ![](https://img.shields.io/static/v1?label=+&message=Python%203.9%2B&color=lightblue&logo=Python)
-![](https://img.shields.io/static/v1?label=status&message=Work%20In%20Progress&color=red)
+![](https://img.shields.io/static/v1?label=status&message=Ready&color=red)
 [![PyPI](https://img.shields.io/pypi/v/easy-scraper-py.svg)](https://pypi.python.org/pypi/easy-scraper-py)
 
 An easy scraping tool for HTML
@@ -28,8 +28,8 @@ Re-implementation of [tanakh/easy-scraper](https://github.com/tanakh/easy-scrape
     <a class=nothere>NotHere</a>
 </body>
 
-<!-- Pattern: partial HTML with variables ({{ name }}) -->
-<a class=here>{{ text }}</a>
+<!-- Pattern: partial HTML with variables ({ name }) -->
+<a class=here>{ text }</a>
 ```
 
 ```python
@@ -43,7 +43,7 @@ target = r"""<body>
 """  # newlines and spaces are all ignored.
 
 # Matching innerText under a-tag with class="here"
-pattern = "<a class=here>{{ text }}</a>"
+pattern = "<a class=here>{ text }</a>"
 
 easy_scraper.match(target, pattern)  # [{'text': 'Here'}]
 ```
@@ -70,7 +70,7 @@ target = r"""
 # Marching links (href and innerText) under div-tag with class="here"
 pattern = r"""
     <div class=here>
-        <a href="{{ link }}">{{ text }}</a>
+        <a href="{ link }">{ text }</a>
     </div>
 """
 
@@ -90,7 +90,7 @@ import easy_scraper
 import urllib.request
 
 body = urllib.request.urlopen("https://kuragebunch.com/rss/series/10834108156628842505").read().decode()
-res = easy_scraper.match(body, "<item><title>{{ title }}</title><link>{{ link }}</link></item>")
+res = easy_scraper.match(body, "<item><title>{ title }</title><link>{ link }</link></item>")
 for item in res[:5]:
     print(item)
 ```
@@ -105,10 +105,10 @@ url = "https://unsplash.com/s/photos/sample"
 body = urllib.request.urlopen(url).read().decode()
 
 # Matching all images
-res = easy_scraper.match(body, r"<img src='{{ im }}' />")
+res = easy_scraper.match(body, r"<img src='{ im }' />")
 print(res)
 
 # Matching linked (under a-tag) images
-res = easy_scraper.match(body, r"<a href='{{ link }}'><img src='{{ im }}' /></a>")
+res = easy_scraper.match(body, r"<a href='{ link }'><img src='{ im }' /></a>")
 print(res)
 ```
